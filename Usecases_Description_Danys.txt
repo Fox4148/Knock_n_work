@@ -1,0 +1,161 @@
+ Title: Authenticate 
+ Actors: User, GoogleAPI 
+ Pre-events: User open the app. 
+ Post-events: 
+ 	 Success: User successfully authenticate with the google API. Redirected to the Navigation 
+ 	 Failure: User does not authenticate. edirected to the Navigation. 
+ Path: 
+ 	Primary: User open the app. System contacts the API to get credentials. User get authenticated. 
+ 	Alternate: User touch the Login button in the preference menu, this open the google authentication system API.* 
+ 	Exception: User does not get authenticated, user is redirected to the Navigation page. 
+Description: The user get authenticated by the google API credentials to retrieve the username of the user. 
+Created by: Danys Chalifour 
+Date: 31 August 2018 
+Revision: N/A
+Frequent of use: At the app opening or at user demand's. 
+*May change trough the project. 
+
+
+
+Title: Navigate Jobs 
+Actors: User, GoogleAPI 
+Pre-events: Authentication step is done. App is idle.
+Post-events: 
+	Success: App Display jobs. App goes back to idle.
+	Failure: App Crash. (Since this is the main feature). Bug report is sent to bug mail. 
+Path: 
+	Primary: The loading screen ends. Overlay get loaded. The system get user setting to display a map/list view. Job get loaded to the
+			 screen. 
+	Alternate: N/A 
+	Exception: Exception found is sent to bug mail and app crash. 
+Description: The user can navigate trough job lists. He has two option; either with an interactive map, or a classic list view. 
+			 He has a search bar to help him browse. The user can access the preference menu, the Pinjob menu. 
+			 GoogleAPI's will display a satellite/street map to the user if he decides to use it. 
+Created by: Danys Chalifour 
+Date: 4 September 2018 Revision: N/A
+Frequent of use: Main app. Feature. 
+
+
+
+Title: View Job Info 
+Actors: User 
+Pre-events: User is navigating jobs and press one of them. 
+Post-events: 
+			Success: "InfoJobView" shows with the job info and rating. 
+			Failure: User is sent back to the navigation.
+			 Bugmail is sent with exception report. 
+Path: 
+	Primary: Database retrieve the job info. The view loads. Job info is displayed. 
+	Alternate: User manage his posted/Pin job and he presses one of them. 
+	Exception: ViewJob closes and user is sent back to the Navigation. Bugmail is sent 
+Description: User will be able to view the full list of information included into the job post. 
+Created by: Danys Chalifour 
+Date: 4 September 2018 
+Revision: N/A
+Frequent of use: Main features of the app. 
+
+
+
+
+Title: Post Job 
+Actors: User, System 
+Pre-events: App is idle. User is authenticated. 
+Post-events: 
+	Success: "PostJobView" view closes and app goes back to idle state. 
+	Failure: Emergency mail is send with a report of the information that led to the failure, tell the user.
+			 Redirect the user to the navigation view. 
+Path: 
+	Primary: User fill the form inside "PostJobView", a spell checker reviews the form and notify the user if it passes;
+			 the server updates the job list and the post is successful. 
+	Alternate: N/A 
+	Exception: The user gets notified if the post doesn't follow our policy and rules. Until he corrects/cancels it. 
+Description: The user will have the possibility to fill a form to officially post a job in the knocknwork market. 
+			 He will have to fill various information. A contact link/address is required for any job post. 
+Created by: Danys Chalifour 
+Date: 31 August 2018 
+Revision: 4 September 2018 
+Frequent of use: High, but mainly only by employer's 
+
+
+
+
+Title: Manage Posted Jobs 
+Actors: User 
+Pre-events: App is idle, user has a job posted and is authenticated. User open "Man_PostJobView" 
+Post-events: 
+	Success: Database register changes. Redirect the user to the navigation view. 
+	Failure: Emergency mail is send with a report of the information that led to the failure, tell the user.
+			 Redirect the user to the Navigation view. 
+Path:
+	 Primary: Database retrieve posted jobs by the user. Displays all of them to the user.
+	 Alternate: N/A 
+	 Exception: We tell the user about an uncommon error and an error report is sent to a bug mail. 
+Description: User will be able to edit/inactive/delete the posted job. Inactive means he can put the job in
+			 "idle" and he can then, delete it. 
+Created by: Danys Chalifour	
+Date: 31 August 2018 
+Revision: 4 September 2018 
+Frequent of use: High, but mainly only by employer's 
+
+
+
+
+Title: Set Search Preference 
+Actors: User 
+Pre-events: App is idle. 
+Post-events: 
+	Success: Menu closes and the user is redirected to the navigation view. 
+	Failure: Emergency mail is send with a report of the information that led to the failure, tell the user, restart app. 
+Path:
+	 Primary: Database loads the setting list. Display their value with the correct unit. 
+	 Alternate: N/A
+	 Exception: We tell the user about an uncommon error and an error report is sent to a bug mail. 
+Description: User will set his search preferences or "criteria" to find suitable jobs according to those. 
+			 More or less; Location, Wage, Payment Method. 
+Created by: Danys Chalifour 
+Date: 30 August 2018 
+Revision: 4 September 2018 
+Frequent of use: More or less, depending on user's job seeking success. 
+
+
+
+
+Title: Rate Job 
+Actors: User, 
+Pre-events: App is idle and user is in the "InfoJobView" under "RateJobView". 
+Post-events:
+	 Success: User cast his vote of availability and recommendation. The vote is registered in the server.
+	 Failure: The vote is not cast and user goes back to the navigation. 
+Path:
+	 Primary: User press on "Rate this job" button in "InfoJobView". He presses either a thumbs up or thumbs down. The server register the awns er and user is sent back to "InfoJobView".
+	 Alternate: N/A
+	 Exception: We tell the user about an uncommon error and an error report is sent to a bug mail. 
+Description: User will be able to rate a job about two main factors; the job availability and the job recommendation status.
+			 This will increase/decrease the rating of the job. 
+Created by: Danys Chalifour 
+Date: 31 August 2018 
+Revision: N/A
+Frequent of use: Frequent if implemented, mostly by Employee's. 
+
+
+
+
+Title: Manage Pinjob* 
+Actors: User 
+Pre-events: App is idle, User is in the "Man_PinjobView" 
+Post-events: 
+		 Success: The view closes, app goes back to the navigation. App goes back idle. 
+		 Failure: User goes back to the navigation, with the error message sent in the bug mail. 
+Path: 
+	 Primary: User press the button to open the view "Man_PinjobView" in the navigation view. 
+	 Alternate: N/A 
+	 Exception: We tell the user about an uncommon error and an error report is sent to a bug mail. User is sent back to the navigation. 
+Description: The user is allowed to browse/delete his Pinjob. It is also said if the job is "unavailable" at the moment. 
+			 The user will receive a notification if the job is set available again. 
+Created by: Danys Chalifour 
+Date: 4 September 2018 
+Revision: N/A
+Frequent of use: Every notification! 
+
+*Pinjob : Because it is a point on a map, a.k.a "Pin" for any map software and it is a job.
+Therefore a new word came into existence: Pinjob.
